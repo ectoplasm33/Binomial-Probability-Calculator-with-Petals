@@ -2,6 +2,8 @@
 
 This Binomial Probability Calcualtor is desgined for general use with this version specifically including a petal conversion feature for https://florr.io players.
 
+**This program is currently only runnable on Windows (x64)**
+
 ## How do I use it?
 - To use the program down load the latest '.zip' file.
 - Once downloaded, right click the file and click 'Extract All...'.
