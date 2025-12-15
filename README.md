@@ -13,5 +13,5 @@ This Binomial Probability Calcualtor is desgined for general use with this versi
 > SmartScreen warning appears because the program is unsigned.
 
 ## How do I use it? 
-- After launching the program, you will see a menu button in the top left corner of the window ⟶ open it.
+- After launching the program, you will see a menu button in the top left corner of the window ⟶ click it.
 - Once the side bar menu is open click the information icon above the text box to read about how the program works and the controls.
