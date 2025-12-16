@@ -4,8 +4,8 @@ This Binomial Probability Calcualtor is desgined for general use with this versi
 
 **This program is currently only runnable on Windows (x64)**
 
-## How do I use it?
-- To use the program down load the latest '.zip' file.
+## How do I get started?
+- To use the program download the latest '.zip' file.
 - Once downloaded, right click the file and click 'Extract All...'.
 - Open the extracted folder and run the executeable file.
 - The executeable will trigger a SmartScreen alert ⟶ just click 'More info' and 'Run anyway'.
