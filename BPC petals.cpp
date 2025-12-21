@@ -221,8 +221,12 @@ static void execute_thread(unsigned int id) {
 		
 		if (worker_task == "raw") {
 			start = chunk * id;
-			end = std::min((id + 1) * chunk, (uint64_t)std::ceil(expected));
-
+			if (id == thread_count - 1) {
+				end = std::ceil(expected);
+			} else {
+				end = (id + 1) * chunk;
+			}
+			
 			double log_factorial_trials = std::lgamma(current_trials + 1.0);
 
 			double amount, prob, probability, index;
@@ -237,7 +241,11 @@ static void execute_thread(unsigned int id) {
 			}
 		} else if (worker_task == "n-") {
 			start = chunk * id;
-			end = std::min((id + 1) * chunk, (uint64_t)std::ceil(expected));
+			if (id == thread_count - 1) {
+				end = std::ceil(expected);
+			} else {
+				end = (id + 1) * chunk;
+			}
 
 			double z = 1.0 - chance;
 
@@ -246,7 +254,11 @@ static void execute_thread(unsigned int id) {
 			}
 		} else if (worker_task == "n+") {
 			start = chunk * id;
-			end = std::min((id + 1) * chunk, (uint64_t)std::ceil(expected));
+			if (id == thread_count - 1) {
+				end = std::ceil(expected);
+			} else {
+				end = (id + 1) * chunk;
+			}
 
 			double z = 1.0 - chance;
 
@@ -255,7 +267,11 @@ static void execute_thread(unsigned int id) {
 			}
 		} else if (worker_task == "eq raw") {
 			start = chunk * id;
-			end = std::min((id + 1) * chunk, (uint64_t)std::ceil(equation_points));
+			if (id == thread_count - 1) {
+				end = std::ceil(equation_points);
+			} else {
+				end = (id + 1) * chunk;
+			}
 
 			double log_factorial_trials = std::lgamma(current_trials + 1.0);
 
@@ -273,7 +289,11 @@ static void execute_thread(unsigned int id) {
 
 		} else if (worker_task == "eq n-") {
 			start = chunk * id;
-			end = std::min((id + 1) * chunk, (uint64_t)std::ceil(equation_points));
+			if (id == thread_count - 1) {
+				end = std::ceil(equation_points);
+			} else {
+				end = (id + 1) * chunk;
+			}
 
 			double z = 1.0 - chance;
 
@@ -286,7 +306,11 @@ static void execute_thread(unsigned int id) {
 
 		} else if (worker_task == "eq n+") {
 			start = chunk * id;
-			end = std::min((id + 1) * chunk, (uint64_t)std::ceil(equation_points));
+			if (id == thread_count - 1) {
+				end = std::ceil(equation_points);
+			} else {
+				end = (id + 1) * chunk;
+			}
 
 			double z = 1.0 - chance;
 
@@ -619,12 +643,12 @@ static std::vector<SDL_Texture*> create_vertical_labels(SDL_Renderer* renderer, 
 	return labels;
 }
 
-static inline std::vector<SDL_Texture*> create_horizontal_labels(SDL_Renderer* renderer, int start, TTF_Font* font, SDL_Color color) {
+static inline std::vector<SDL_Texture*> create_horizontal_labels(SDL_Renderer* renderer, uint64_t start, TTF_Font* font, SDL_Color color) {
 	std::vector<SDL_Texture*> labels;
 
 	size_t max_str_len = 0;
 
-	for (int i = 0; i < calculated_outcomes + 1; i++) {
+	for (uint64_t i = 0; i < calculated_outcomes + 1; i++) {
 		std::string str = format_val(i + start, 1);
 
 		max_str_len = std::max(max_str_len, str.size());
@@ -1630,6 +1654,7 @@ int main() {
 									for (auto& box : inspect_boxes) {
 										for (auto& tx : box.textures) {
 											SDL_DestroyTexture(tx);
+											tx = nullptr;
 										}
 									}
 
